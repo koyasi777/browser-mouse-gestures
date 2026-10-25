@@ -75,6 +75,17 @@ jobs:
           Write-Host "Standalone AHK validation exit code: $($p.ExitCode)"
           if ($p.ExitCode -ne 0) { throw "Standalone AHK validation failed (exit code: $($p.ExitCode))" }
 
+      - name: Validate AutoHotkey helper test syntax
+        shell: pwsh
+        run: |
+          $script = Join-Path $env:GITHUB_WORKSPACE 'tests\gesture_units.ahk'
+          $errLog = Join-Path $env:RUNNER_TEMP 'ahk-test-validation-stderr.txt'
+          $p = Start-Process -FilePath $env:AHK_EXE `
+            -ArgumentList "/ErrorStdOut=UTF-8 /Validate `"$script`"" `
+            -PassThru -Wait -RedirectStandardError $errLog
+          if (Test-Path $errLog) { Get-Content -LiteralPath $errLog -Encoding UTF8 }
+          if ($p.ExitCode -ne 0) { throw "AHK test script failed validation: $($p.ExitCode)" }
+
       - name: Run safe AutoHotkey helper tests
         shell: pwsh
         run: |
@@ -82,11 +93,17 @@ jobs:
           $errLog = Join-Path $env:RUNNER_TEMP 'ahk-tests-stderr.txt'
           $outLog = Join-Path $env:RUNNER_TEMP 'ahk-tests-stdout.txt'
           $p = Start-Process -FilePath $env:AHK_EXE `
-            -ArgumentList "/ErrorStdOut=UTF-8 `"$script`"" `
-            -PassThru -Wait `
+            -ArgumentList "/ErrorStdOut=UTF-8 /force `"$script`"" `
+            -PassThru `
             -RedirectStandardError $errLog -RedirectStandardOutput $outLog
+          $finished = $p.WaitForExit(30000)
+          if (-not $finished) {
+            Stop-Process -Id $p.Id -Force -ErrorAction SilentlyContinue
+            $p.WaitForExit()
+          }
           if (Test-Path $outLog) { Get-Content -LiteralPath $outLog -Encoding UTF8 }
           if (Test-Path $errLog) { Get-Content -LiteralPath $errLog -Encoding UTF8 }
+          if (-not $finished) { throw 'AHK helper tests timed out after 30 seconds (possible warning/error dialog)' }
           Write-Host "AHK helper test exit code: $($p.ExitCode)"
           if ($p.ExitCode -ne 0) { throw "AHK helper tests failed (exit code: $($p.ExitCode))" }
 

@@ -1,5 +1,8 @@
 #Requires AutoHotkey v2.0
-#Warn
+#SingleInstance Off
+#NoTrayIcon
+#Warn All, StdOut
+#ErrorStdOut UTF-8
 ; No hooks or GUI: exercise independent gesture/config helpers only.
 #Include %A_ScriptDir%\..\src\Settings\SettingsPersistence.ahk
 #Include %A_ScriptDir%\..\src\Settings\Appearance.ahk
