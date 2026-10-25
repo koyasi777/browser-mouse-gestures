@@ -2,9 +2,11 @@
 
 English | [日本語](README.ja.md)
 
+**Latest release: v1.0.0** · [Release notes](docs/RELEASE_NOTES_v1.0.0.md)
+
 An open-source Windows mouse gesture utility written in AutoHotkey v2. It works at the OS input layer, not as a browser extension. It supports allowlisted Chromium/Firefox-family browsers, Windows Notepad, and apps explicitly selected by the user.
 
-> **Current codebase:** A behavior-preserving, modular refactor of the working v3.8.3 script. Browser compatibility depends on each installed build; an entry in the allowlist is **not** a claim of hands-on verification.
+> **Current release:** v1.0.0. The runtime is a behavior-preserving modularization of the previously tested v3.8.3 implementation; only the version comment has changed. Browser compatibility depends on each installed build; an entry in the allowlist is **not** a claim of hands-on verification.
 
 ## Features
 
@@ -19,7 +21,7 @@ An open-source Windows mouse gesture utility written in AutoHotkey v2. It works 
 ## Installation
 
 1. Install [AutoHotkey v2](https://www.autohotkey.com/) from its official website.
-2. Get `Browser_MouseGestures_v3_8_3_Standalone.ahk` from a GitHub Release, or build it with `python scripts/build.py` (output in `dist/`).
+2. Get `Browser_MouseGestures_v1_0_0_Standalone.ahk` from a GitHub Release, or build it with `python scripts/build.py` (output in `dist/`).
 3. Exit an older running instance, then launch the new `.ahk` file.
 4. Double-click its system tray icon to configure gestures, wheel behavior, supported applications, sensitivity, and appearance.
 
@@ -55,10 +57,10 @@ python scripts/build.py --check
 
 # Windows with official AutoHotkey v2 installed:
 & "C:\Program Files\AutoHotkey\v2\AutoHotkey64.exe" /ErrorStdOut=UTF-8 /Validate .\MouseGestures.ahk
-& "C:\Program Files\AutoHotkey\v2\AutoHotkey64.exe" /ErrorStdOut=UTF-8 /Validate .\dist\Browser_MouseGestures_v3_8_3_Standalone.ahk
+& "C:\Program Files\AutoHotkey\v2\AutoHotkey64.exe" /ErrorStdOut=UTF-8 /Validate .\dist\Browser_MouseGestures_v1_0_0_Standalone.ahk
 ```
 
-The builder verifies that the produced standalone code exactly reconstructs the original v3.8.3 source after UTF-8/newline normalization. On GitHub Actions, Windows loads the modules and standalone build using AutoHotkey's **`/Validate`** mode (no hotkeys executed), then runs small safe AHK helper tests. These checks do **not** replace manual testing of GUI/input interactions.
+The builder verifies that the v1.0.0 standalone release matches the previously tested v3.8.3 runtime exactly **after restoring only the version comment for comparison**. The original reference hash is retained to detect unintended executable changes. On GitHub Actions, Windows loads the modules and standalone build using AutoHotkey's **`/Validate`** mode (no hotkeys executed), then runs small safe AHK helper tests. These checks do **not** replace manual testing of GUI/input interactions.
 
 See [Architecture](docs/ARCHITECTURE.md) and [Contributing](CONTRIBUTING.md).
 

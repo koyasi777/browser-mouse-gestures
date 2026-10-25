@@ -1,6 +1,6 @@
 # Security & privacy / セキュリティとプライバシー
 
-- **Offline by default:** The v3.8.3 source does not intentionally contact network endpoints or implement telemetry/update checking. Review all future changes if this is important to you.
+- **Offline by default:** The v1.0.0 source does not intentionally contact network endpoints or implement telemetry/update checking. Review all future changes if this is important to you.
 - **Local settings:** `%APPDATA%\ChromiumMouseGestures\settings.ini` stores gesture settings and optional absolute paths to user-registered programs. These paths can identify a machine/user. Do not upload this file in public bug reports or commits.
 - **Input permissions:** AutoHotkey simulates keyboard shortcuts to desktop windows. It selects the window under the mouse at right-button press, verifies the target, and activates it before sending; it does not elevate privileges automatically.
 - **Scope:** Bundled browser allowlists are best-effort. Unknown apps are not opted in except for Windows Notepad; users can add running windows explicitly. Native gestures of other browser apps may conflict with this tool.

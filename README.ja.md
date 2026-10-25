@@ -2,9 +2,11 @@
 
 [English](README.md) | 日本語
 
+**正式リリース: v1.0.0** · [リリースノート](docs/RELEASE_NOTES_v1.0.0.md)
+
 Windows向けの、AutoHotkey v2で動くオープンソースのマウスジェスチャーツールです。Chromium系・Firefox系ブラウザ、Windowsメモ帳、ユーザーが登録したアプリを対象にできます。ブラウザ拡張機能ではなくOS側で動作するため、一般的な拡張機能では操作できないブラウザ内部ページでも利用できます（アプリ側の制限は残ります）。
 
-> **現在の配布コード:** v3.8.3から機能を変更せず、開発用ソースをモジュール分割したものです。全ブラウザ・すべてのWindows構成での動作を保証するものではありません。
+> **正式公開バージョン: v1.0.0。** 動作確認済みの旧v3.8.3実装を、機能を変更せずモジュール分割したものです。バージョンコメントのみ変更しています。全ブラウザ・すべてのWindows構成での動作を保証するものではありません。
 
 ## 主な機能
 
@@ -22,7 +24,7 @@ Windows向けの、AutoHotkey v2で動くオープンソースのマウスジェ
 **方法A：1ファイル版（推奨）**
 
 1. [AutoHotkey v2](https://www.autohotkey.com/) を公式サイトからインストール。
-2. GitHub Releasesの `Browser_MouseGestures_v3_8_3_Standalone.ahk` を保存（またはこのリポジトリで `python scripts/build.py` を実行して `dist/` に生成）。
+2. GitHub Releasesの `Browser_MouseGestures_v1_0_0_Standalone.ahk` を保存（またはこのリポジトリで `python scripts/build.py` を実行して `dist/` に生成）。
 3. ほかのバージョンのBrowser Mouse Gesturesが実行中なら終了し、AHKファイルを実行。
 4. タスクトレイのアイコンをダブルクリックして設定画面を開く。
 
@@ -67,10 +69,10 @@ python scripts/build.py
 
 # Windows / AutoHotkey v2 がインストールされている環境で
 & "C:\Program Files\AutoHotkey\v2\AutoHotkey64.exe" /ErrorStdOut=UTF-8 /Validate .\MouseGestures.ahk
-& "C:\Program Files\AutoHotkey\v2\AutoHotkey64.exe" /ErrorStdOut=UTF-8 /Validate .\dist\Browser_MouseGestures_v3_8_3_Standalone.ahk
+& "C:\Program Files\AutoHotkey\v2\AutoHotkey64.exe" /ErrorStdOut=UTF-8 /Validate .\dist\Browser_MouseGestures_v1_0_0_Standalone.ahk
 ```
 
-`build.py` は開発用の全モジュールを結合し、**元のv3.8.3と同じ実行コードであることをSHA-256で確認**します。Windowsの自動構文検証・独立した関数テストはGitHub Actionsで実行されます。実機でのマウス操作は自動CIだけでは確認できないため、[CONTRIBUTING.md](CONTRIBUTING.md) に従って手動確認してください。
+`build.py` は開発用の全モジュールを結合し、**バージョンコメントだけを比較時に旧表記へ戻した上で、元のv3.8.3と実行コードが一致することをSHA-256で確認**します。Windowsの自動構文検証・独立した関数テストはGitHub Actionsで実行されます。実機でのマウス操作は自動CIだけでは確認できないため、[CONTRIBUTING.md](CONTRIBUTING.md) に従って手動確認してください。
 
 ファイル分割の詳細は [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) を参照してください。
 

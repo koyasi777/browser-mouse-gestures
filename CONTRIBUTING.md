@@ -7,13 +7,13 @@ Thanks for contributing. Please file an Issue with Windows version, AutoHotkey v
 1. Install Python 3.10+ and official AutoHotkey v2 (on Windows).
 2. Run `python -m unittest discover -s tests -v`.
 3. Run `python scripts/build.py --check`.
-4. After changes, run `python scripts/build.py` to create `dist/Browser_MouseGestures_v3_8_3_Standalone.ahk`.
+4. After changes, run `python scripts/build.py` to create `dist/Browser_MouseGestures_v1_0_0_Standalone.ahk`.
 5. Use AutoHotkey `/ErrorStdOut=UTF-8 /Validate` to syntax-check both the source entrypoint and single-file release.
 6. **Manually test**: regular right-click, ↓, ↓→, unregistered gestures, right-button+wheel, focused/unfocused target windows, Win11 Notepad, tiled trails crossing monitor boundaries, recoloring, config migration, tray/window icons and UI settings.
 
 ## Important: strict refactor baseline
 
-`scripts/build.py` currently compares the generated source to the original v3.8.3 fingerprint in `tests/reference.sha256`. This guards **exact runtime-source parity** for the initial refactor. For later feature changes, intentionally update the baseline/test strategy in a dedicated, reviewed commit (do not casually replace a failed hash), add tests, and update `CHANGELOG.md` and version numbers.
+`scripts/build.py` currently compares the generated source to the original v3.8.3 fingerprint in `tests/reference.sha256`. For public release v1.0.0, the version comment alone is normalized back to v3.8.3 before hashing. This guards **exact executable-runtime parity** for the initial refactor. For later feature changes, intentionally update the baseline/test strategy in a dedicated, reviewed commit (do not casually replace a failed hash), add tests, and update `CHANGELOG.md` and version numbers.
 
 ## Updating preset icons
 

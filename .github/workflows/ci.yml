@@ -63,7 +63,7 @@ jobs:
       - name: Validate standalone release without executing hooks
         shell: pwsh
         run: |
-          $script = Join-Path $env:GITHUB_WORKSPACE 'dist\Browser_MouseGestures_v3_8_3_Standalone.ahk'
+          $script = Join-Path $env:GITHUB_WORKSPACE 'dist\Browser_MouseGestures_v1_0_0_Standalone.ahk'
           $errLog = Join-Path $env:RUNNER_TEMP 'ahk-standalone-stderr.txt'
           $outLog = Join-Path $env:RUNNER_TEMP 'ahk-standalone-stdout.txt'
           $p = Start-Process -FilePath $env:AHK_EXE `
@@ -110,5 +110,5 @@ jobs:
       - name: Upload standalone script
         uses: actions/upload-artifact@v4
         with:
-          name: BrowserMouseGestures-v3.8.3-Standalone
-          path: dist/Browser_MouseGestures_v3_8_3_Standalone.ahk
+          name: BrowserMouseGestures-v1.0.0-Standalone
+          path: dist/Browser_MouseGestures_v1_0_0_Standalone.ahk

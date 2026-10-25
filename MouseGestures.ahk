@@ -2,7 +2,7 @@
 #SingleInstance Force
 #Warn
 
-; Browser Mouse Gestures v3.8.3 - Mouse-hover targeting; custom tray and settings icons; fast pixel recoloring
+; Browser Mouse Gestures v1.0.0 - Mouse-hover targeting; custom tray and settings icons; fast pixel recoloring
 ; Windows / AutoHotkey v2, no external libraries, no GDI+.
 ; Supported: selected Chromium and Gecko-family browsers, with per-browser toggles.
 ; Right mouse button + cardinal directions, up to three strokes.

@@ -1,6 +1,6 @@
-# Architecture: behavior-preserving v3.8.3 extraction
+# Architecture: v1.0.0, behavior-preserving extraction
 
-The entrypoint `MouseGestures.ahk` owns the original startup state/global constants, initialization, tray hook, and hotkey declarations. `#Include` imports below preserve the exact original function definitions and order from the known-working v3.8.3 script.
+The v1.0.0 runtime is based on the already-tested v3.8.3 implementation. The entrypoint `MouseGestures.ahk` owns the original startup state/global constants, initialization, tray hook, and hotkey declarations. `#Include` imports below preserve the exact original function definitions and order from the known-working v3.8.3 script.
 
 | Module | Purpose |
 |---|---|
@@ -27,7 +27,8 @@ The entrypoint `MouseGestures.ahk` owns the original startup state/global consta
 
 - `scripts/modules.json` is the canonical concatenation order.
 - `scripts/build.py` assembles the entrypoint (without `#Include` directives) and modules in that order.
-- `tests/reference.sha256` is the hash of the original script after removing the UTF-8 BOM and normalizing line endings. The builder compares against this to prevent changes to the known-working baseline during the first refactor.
+- `tests/reference.sha256` is the hash of the original script after removing the UTF-8 BOM and normalizing line endings. The builder restores **only** the public version comment to its v3.8.3 wording before calculating the checksum. This ensures that the v1.0.0 executable logic is unchanged from the known-working baseline.
+- `VERSION` is the release version used for packaging. The entrypoint comment must match.
 - `dist/` is generated. The standalone artifact uses UTF-8 with BOM and Windows CRLF, matching the original distribution style.
 
 ## Testing layers

@@ -10,7 +10,7 @@ body:
     id: version
     attributes:
       label: Script version / バージョン
-      placeholder: v3.8.3
+      placeholder: v1.0.0
     validations:
       required: true
   - type: input

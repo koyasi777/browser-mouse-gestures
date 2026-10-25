@@ -13,13 +13,28 @@ import build
 
 
 class ReleaseParityTests(unittest.TestCase):
-    def test_standalone_exact_v383_parity(self):
+    def test_v100_matches_v383_runtime_baseline(self):
         content = build.build_text()
-        self.assertEqual(hashlib.sha256(content.encode("utf-8")).hexdigest(),
+        self.assertEqual(build.VERSION, "1.0.0")
+        self.assertEqual(build.verify(content),
                          (ROOT / "tests/reference.sha256").read_text().strip())
+        self.assertIn("; Browser Mouse Gestures v1.0.0 - ", content)
+        self.assertEqual(build.DIST.name, "Browser_MouseGestures_v1_0_0_Standalone.ahk")
         self.assertEqual(content.count("#Requires AutoHotkey v2.0"), 1)
         self.assertIn("SetWinDelay(0)", content)
         self.assertNotIn("#Include", content)
+
+    def test_runtime_changes_break_reference_parity(self):
+        content = build.build_text()
+        with self.assertRaises(ValueError):
+            build.verify(content.replace("SetWinDelay(0)", "SetWinDelay(10)", 1))
+
+    def test_public_version_does_not_mutate_executable_code(self):
+        content = build.build_text()
+        canonical = build.canonical_baseline_text(content)
+        self.assertEqual(canonical.count("; Browser Mouse Gestures v3.8.3 - "), 1)
+        self.assertEqual(hashlib.sha256(canonical.encode("utf-8")).hexdigest(),
+                         (ROOT / "tests/reference.sha256").read_text().strip())
 
     def test_no_duplicate_functions_in_extracted_code(self):
         code = build.build_text()
