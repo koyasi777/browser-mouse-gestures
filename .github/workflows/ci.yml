@@ -48,8 +48,15 @@ jobs:
       - name: Validate modular script without executing hooks
         shell: pwsh
         run: |
-          & "$env:AHK_EXE" /ErrorStdOut=UTF-8 /Validate "$env:GITHUB_WORKSPACE\MouseGestures.ahk"
-          if ($LASTEXITCODE -ne 0) { throw 'Modular entrypoint syntax validation failed' }
+          $errorLog = Join-Path $env:RUNNER_TEMP 'ahk-validation-errors.txt'
+          & "$env:AHK_EXE" /ErrorStdOut=UTF-8 /Validate "$env:GITHUB_WORKSPACE\MouseGestures.ahk" 2> $errorLog
+          $exitCode = $LASTEXITCODE
+          if (Test-Path $errorLog) {
+            Get-Content -LiteralPath $errorLog -Encoding UTF8
+          }
+          if ($exitCode -ne 0) {
+            throw "Modular validation failed (exit code: $exitCode)"
+          }
 
       - name: Validate standalone release without executing hooks
         shell: pwsh
