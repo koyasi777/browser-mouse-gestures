@@ -1,0 +1,4 @@
+*.ahk text eol=crlf whitespace=-blank-at-eof
+*.py text eol=lf
+*.md text eol=lf
+*.ico binary

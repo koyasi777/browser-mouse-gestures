@@ -1,0 +1,34 @@
+name: Bug report / 不具合報告
+description: Reproducible problems with input, targeting, trails, settings, or UI.
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "Remove personal executable paths and sensitive details from screenshots/logs. Do not upload your settings.ini unredacted. / パスなどの個人情報は削除してください。"
+  - type: input
+    id: version
+    attributes:
+      label: Script version / バージョン
+      placeholder: v3.8.3
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Windows / AutoHotkey / Browser versions
+      placeholder: Windows 11 / AHK v2.0.x / Brave etc.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce / 再現方法
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs actual behavior / 期待結果・実際の結果
+    validations:
+      required: true

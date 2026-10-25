@@ -1,0 +1,18 @@
+[
+  "src/Core/WindowTargeting.ahk",
+  "src/Core/GestureRecognizer.ahk",
+  "src/Core/GestureController.ahk",
+  "src/Rendering/TrailRenderer.ahk",
+  "src/Settings/Appearance.ahk",
+  "src/Rendering/GestureHUD.ahk",
+  "src/Rendering/LayeredCanvas.ahk",
+  "src/Settings/SettingsPersistence.ahk",
+  "src/Icons/IconStorage.ahk",
+  "src/Icons/EmbeddedIcons.ahk",
+  "src/Icons/IconUI.ahk",
+  "src/UI/SettingsWindow.ahk",
+  "src/UI/BrowserControls.ahk",
+  "src/UI/RecognitionControls.ahk",
+  "src/UI/WheelControls.ahk",
+  "src/UI/CustomAppControls.ahk"
+]

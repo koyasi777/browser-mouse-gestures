@@ -1,0 +1,22 @@
+# Private configuration and local app data
+settings.ini
+*.ini.bak
+*.pre-v*.bak
+
+# Generated release and compilation outputs
+dist/
+*.exe
+*.bin
+*.obj
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Editor and machine-specific files
+.vscode/
+.idea/
+*.log
+Thumbs.db
+Desktop.ini
