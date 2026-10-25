@@ -48,27 +48,47 @@ jobs:
       - name: Validate modular script without executing hooks
         shell: pwsh
         run: |
-          $errorLog = Join-Path $env:RUNNER_TEMP 'ahk-validation-errors.txt'
-          & "$env:AHK_EXE" /ErrorStdOut=UTF-8 /Validate "$env:GITHUB_WORKSPACE\MouseGestures.ahk" 2> $errorLog
-          $exitCode = $LASTEXITCODE
-          if (Test-Path $errorLog) {
-            Get-Content -LiteralPath $errorLog -Encoding UTF8
-          }
-          if ($exitCode -ne 0) {
-            throw "Modular validation failed (exit code: $exitCode)"
-          }
+          $script = Join-Path $env:GITHUB_WORKSPACE 'MouseGestures.ahk'
+          $errLog = Join-Path $env:RUNNER_TEMP 'ahk-modular-stderr.txt'
+          $outLog = Join-Path $env:RUNNER_TEMP 'ahk-modular-stdout.txt'
+          $p = Start-Process -FilePath $env:AHK_EXE `
+            -ArgumentList "/ErrorStdOut=UTF-8 /Validate `"$script`"" `
+            -PassThru -Wait `
+            -RedirectStandardError $errLog -RedirectStandardOutput $outLog
+          if (Test-Path $outLog) { Get-Content -LiteralPath $outLog -Encoding UTF8 }
+          if (Test-Path $errLog) { Get-Content -LiteralPath $errLog -Encoding UTF8 }
+          Write-Host "Modular AHK validation exit code: $($p.ExitCode)"
+          if ($p.ExitCode -ne 0) { throw "Modular AHK validation failed (exit code: $($p.ExitCode))" }
 
       - name: Validate standalone release without executing hooks
         shell: pwsh
         run: |
-          & "$env:AHK_EXE" /ErrorStdOut=UTF-8 /Validate "$env:GITHUB_WORKSPACE\dist\Browser_MouseGestures_v3_8_3_Standalone.ahk"
-          if ($LASTEXITCODE -ne 0) { throw 'Standalone syntax validation failed' }
+          $script = Join-Path $env:GITHUB_WORKSPACE 'dist\Browser_MouseGestures_v3_8_3_Standalone.ahk'
+          $errLog = Join-Path $env:RUNNER_TEMP 'ahk-standalone-stderr.txt'
+          $outLog = Join-Path $env:RUNNER_TEMP 'ahk-standalone-stdout.txt'
+          $p = Start-Process -FilePath $env:AHK_EXE `
+            -ArgumentList "/ErrorStdOut=UTF-8 /Validate `"$script`"" `
+            -PassThru -Wait `
+            -RedirectStandardError $errLog -RedirectStandardOutput $outLog
+          if (Test-Path $outLog) { Get-Content -LiteralPath $outLog -Encoding UTF8 }
+          if (Test-Path $errLog) { Get-Content -LiteralPath $errLog -Encoding UTF8 }
+          Write-Host "Standalone AHK validation exit code: $($p.ExitCode)"
+          if ($p.ExitCode -ne 0) { throw "Standalone AHK validation failed (exit code: $($p.ExitCode))" }
 
       - name: Run safe AutoHotkey helper tests
         shell: pwsh
         run: |
-          & "$env:AHK_EXE" /ErrorStdOut=UTF-8 "$env:GITHUB_WORKSPACE\tests\gesture_units.ahk"
-          if ($LASTEXITCODE -ne 0) { throw 'AHK helper tests failed' }
+          $script = Join-Path $env:GITHUB_WORKSPACE 'tests\gesture_units.ahk'
+          $errLog = Join-Path $env:RUNNER_TEMP 'ahk-tests-stderr.txt'
+          $outLog = Join-Path $env:RUNNER_TEMP 'ahk-tests-stdout.txt'
+          $p = Start-Process -FilePath $env:AHK_EXE `
+            -ArgumentList "/ErrorStdOut=UTF-8 `"$script`"" `
+            -PassThru -Wait `
+            -RedirectStandardError $errLog -RedirectStandardOutput $outLog
+          if (Test-Path $outLog) { Get-Content -LiteralPath $outLog -Encoding UTF8 }
+          if (Test-Path $errLog) { Get-Content -LiteralPath $errLog -Encoding UTF8 }
+          Write-Host "AHK helper test exit code: $($p.ExitCode)"
+          if ($p.ExitCode -ne 0) { throw "AHK helper tests failed (exit code: $($p.ExitCode))" }
 
       - name: Upload standalone script
         uses: actions/upload-artifact@v4
