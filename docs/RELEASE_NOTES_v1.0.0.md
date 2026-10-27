@@ -9,21 +9,25 @@ First public open-source release for Windows, built with AutoHotkey v2.
 - Seven recognition sensitivity levels
 - Customizable gesture trails, colors, glow, HUD themes and tray icons
 - Support for selected Chromium/Gecko browsers, Windows Notepad, and user-selected apps
-- Local configuration; no telemetry or automatic network calls
-- Source available in modular form, plus a standalone `.ahk` download
+- Local configuration; no telemetry or automatic network calls in the script
+- Modular source code, a portable Windows x64 EXE, and a standalone AHK script
 
-## Install
+## Download and install
 
-1. Install [AutoHotkey v2](https://www.autohotkey.com/).
-2. Download **Browser_MouseGestures_v1_0_0_Standalone.ahk** from the release assets.
-3. Run the `.ahk` and use the tray icon to configure gestures.
+**Recommended — Windows x64 EXE:** Download `BrowserMouseGestures-v1.0.0.exe` from the release Assets and run it. AutoHotkey does **not** need to be installed. Run without administrator privileges unless a specific use case requires elevation.
 
-The standalone file does not include an AutoHotkey runtime or installer. No compilation required.
+**Alternative — standalone script:** Install [AutoHotkey v2](https://www.autohotkey.com/), download `Browser_MouseGestures_v1_0_0_Standalone.ahk`, and run it.
 
-## Verification
+Exit any older copy before running the new version. Open Settings from the system tray icon.
 
-Windows CI validates both the modular and standalone scripts, runs Python and AutoHotkey helper tests, and verifies the runtime against a previously tested implementation (except for the version comment). Manual Windows operation of the modular build was also confirmed. Browser/app compatibility varies by installation.
+## Verification and security
+
+The standalone AHK and the modular source pass Windows CI syntax and helper tests. The release runtime matches a previously tested implementation apart from the version comment. The EXE was separately compiled with official Ahk2Exe using an **AutoHotkey v2.0.27 x64** base and was manually tested on Windows. The current CI **does not automatically build or verify the EXE**. Compatibility varies by browser installation. An unsigned EXE may trigger a SmartScreen warning; verify the download source.
+
+## Licenses
+
+The project script is MIT-licensed. The EXE bundles the AutoHotkey interpreter, separately licensed under **GNU GPL v2**. See [third-party notices](https://github.com/koyasi777/browser-mouse-gestures/blob/main/THIRD_PARTY_NOTICES.md) and [GPL v2](https://github.com/koyasi777/browser-mouse-gestures/blob/main/LICENSES/GPL-2.0.txt). AutoHotkey v2.0.27 source: https://github.com/AutoHotkey/AutoHotkey/tree/v2.0.27
 
 ---
 
-**日本語:** Windows向けの初回公開版です。AutoHotkey v2をインストールし、リリースの `Browser_MouseGestures_v1_0_0_Standalone.ahk` をダウンロードして実行してください。設定はタスクトレイのアイコンから変更できます。動作確認済みの旧実装から、実行処理は変更していません。
+**日本語:** Windows x64向け初回正式版です。通常は `BrowserMouseGestures-v1.0.0.exe` をダウンロードしてそのまま起動してください（AutoHotkeyのインストール不要）。ソースを確認・編集したい場合は、AutoHotkey v2をインストールして単一AHK版を使用できます。設定はタスクトレイから変更できます。EXEには別ライセンスのAutoHotkey実行環境が含まれています。

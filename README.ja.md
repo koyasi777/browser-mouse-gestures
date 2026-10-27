@@ -21,14 +21,19 @@ Windows向けの、AutoHotkey v2で動くオープンソースのマウスジェ
 
 ## インストールと実行
 
-**方法A：1ファイル版（推奨）**
+**方法A：Windows x64 EXE版（推奨・AutoHotkeyの導入不要）**
+
+1. [v1.0.0のRelease](https://github.com/koyasi777/browser-mouse-gestures/releases/tag/v1.0.0) から `BrowserMouseGestures-v1.0.0.exe` をダウンロード。
+2. 古い版が実行中ならタスクトレイから終了して、EXEを通常の権限で起動（管理者権限は原則不要）。
+3. タスクトレイのアイコンをダブルクリックして設定画面を開く。
+
+**方法B：単一AHK版（AutoHotkey v2が必要）**
 
 1. [AutoHotkey v2](https://www.autohotkey.com/) を公式サイトからインストール。
-2. GitHub Releasesの `Browser_MouseGestures_v1_0_0_Standalone.ahk` を保存（またはこのリポジトリで `python scripts/build.py` を実行して `dist/` に生成）。
-3. ほかのバージョンのBrowser Mouse Gesturesが実行中なら終了し、AHKファイルを実行。
-4. タスクトレイのアイコンをダブルクリックして設定画面を開く。
+2. 上記Releaseから `Browser_MouseGestures_v1_0_0_Standalone.ahk` をダウンロード（または `python scripts/build.py` で `dist/` に生成）。
+3. 古い版を終了し、AHKファイルを実行。設定はタスクトレイから開けます。
 
-**方法B：開発用の分割版**
+**方法C：開発用の分割版**
 
 リポジトリをクローンし、ルートの `MouseGestures.ahk` を実行します。`src/` と一緒に配置してください。Pythonは実行時には不要です。
 
@@ -58,7 +63,7 @@ OperaやVivaldiのように標準のマウスジェスチャーを持つブラ�
 - 右クリック開始時に対象ウィンドウを記録し、操作時にそのウィンドウをアクティブ化してキー操作を送信します。**バックグラウンドのまま操作する方式ではありません。**
 - 管理者権限で実行されるアプリには、通常権限のAHKから入力を送れない場合があります。むやみにAHK全体を管理者として実行しないでください。
 - 起動中のアプリのパスや設定がローカルに保存されます。`settings.ini` をGitHubの公開リポジトリへコミットしないでください。
-- `.exe` 化した配布物は用意していません。コードを確認できる `.ahk` の公開を優先しています。
+- Windows x64向けEXE版は公式Ahk2ExeとAutoHotkey v2.0.27ベースで手動生成・Windows上で動作確認しています。現行CIはAHKソースを検証しますが、EXE自体のビルドや検証は自動化していません。未署名のEXEはSmartScreenの警告が出る場合があります。
 - 詳しくは [SECURITY.md](SECURITY.md) を参照してください。
 
 ## 開発・検証
@@ -78,4 +83,4 @@ python scripts/build.py
 
 ## ライセンス
 
-プロジェクトのコード・同梱素材は [MIT License](LICENSE) の下で配布する想定です。公開前に、権利者によるライセンス表記の最終確認を行ってください。AutoHotkey本体は別ライセンスです。AutoHotkeyのランタイムを同梱する場合は、そのライセンス条件を別途確認してください。
+本プロジェクト独自のスクリプト・アイコンは [MIT License](LICENSE) で配布する想定です（公開前に権利・出所を最終確認）。EXEに組み込まれるAutoHotkey v2.0.27の実行環境には、別途 **GNU GPL v2** が適用されます。詳細は [第三者ライセンス告知](THIRD_PARTY_NOTICES.md) と [GPL v2本文](LICENSES/GPL-2.0.txt) を参照してください。EXE全体がMITライセンスだけで構成されるという意味ではありません。

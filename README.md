@@ -20,10 +20,19 @@ An open-source Windows mouse gesture utility written in AutoHotkey v2. It works 
 
 ## Installation
 
+**Recommended: Windows x64 EXE (no AutoHotkey installation required)**
+
+1. Download `BrowserMouseGestures-v1.0.0.exe` from the [v1.0.0 release](https://github.com/koyasi777/browser-mouse-gestures/releases/tag/v1.0.0).
+2. Exit any older running copy of Browser Mouse Gestures, then run the EXE normally (without administrator privileges).
+3. Double-click its system tray icon to configure gestures, applications, sensitivity, and appearance.
+
+**Alternative: standalone AutoHotkey v2 script**
+
 1. Install [AutoHotkey v2](https://www.autohotkey.com/) from its official website.
-2. Get `Browser_MouseGestures_v1_0_0_Standalone.ahk` from a GitHub Release, or build it with `python scripts/build.py` (output in `dist/`).
-3. Exit an older running instance, then launch the new `.ahk` file.
-4. Double-click its system tray icon to configure gestures, wheel behavior, supported applications, sensitivity, and appearance.
+2. Download `Browser_MouseGestures_v1_0_0_Standalone.ahk` from the same release, or build it with `python scripts/build.py` (output in `dist/`).
+3. Exit any older running copy, then launch the `.ahk` file. Configure it using the system tray icon.
+
+The EXE was built manually using the official Ahk2Exe and the **AutoHotkey v2.0.27 x64** base, then manually tested on Windows. GitHub Actions currently validates and packages the AHK script; it **does not build or test this EXE**. Unsigned executables may produce a Windows SmartScreen warning.
 
 For development, clone this repository and run `MouseGestures.ahk` directly. All `src/` files must remain next to the entrypoint in their original layout. Python is required **only to build/test**, not to run the app.
 
@@ -66,4 +75,4 @@ See [Architecture](docs/ARCHITECTURE.md) and [Contributing](CONTRIBUTING.md).
 
 ## License
 
-[MIT](LICENSE), subject to a final upstream code/icon provenance review before publishing. The AutoHotkey runtime is independently licensed and **not distributed here**.
+The project's original script and artwork are intended to be distributed under [MIT](LICENSE), subject to confirmation of rights and provenance. The optional prebuilt EXE embeds **AutoHotkey v2.0.27**, which is separately licensed under **GNU GPL v2**. See [Third-party notices](THIRD_PARTY_NOTICES.md) and [GPL-2.0 license text](LICENSES/GPL-2.0.txt). The MIT license is **not** a claim that the bundled AutoHotkey interpreter is MIT-licensed.
